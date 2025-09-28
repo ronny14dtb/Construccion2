@@ -1,4 +1,4 @@
-package com.universidad.proyecto.gestionhospital.domain;
+package com.universidad.proyecto.gestionhospital.domain.model;
 
 import jakarta.persistence.*;
 
@@ -6,9 +6,8 @@ import jakarta.persistence.*;
 @Table(name = "enfermeras")
 public class Enfermera extends Empleado {
 
-    private String turno; 
-    private String area;  
-
+    private String turno;
+    private String area;
 
     public Enfermera() {}
 

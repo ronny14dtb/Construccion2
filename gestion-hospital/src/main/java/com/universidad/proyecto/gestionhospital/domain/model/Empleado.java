@@ -16,7 +16,6 @@ public class Empleado {
     private String cargo;
     private String documentoIdentidad;
 
-
     public Empleado() {}
 
     public Empleado(String nombre, String apellido, String cargo, String documentoIdentidad) {

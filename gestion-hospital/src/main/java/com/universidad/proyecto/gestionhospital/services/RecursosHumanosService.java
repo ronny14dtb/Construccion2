@@ -3,7 +3,7 @@ package com.universidad.proyecto.gestionhospital.services;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 import com.universidad.proyecto.gestionhospital.repository.EmpleadoRepository;
-import com.universidad.proyecto.gestionhospital.domain.Empleado;
+import com.universidad.proyecto.gestionhospital.domain.model.Empleado;
 
 @Service
 public class RecursosHumanosService {

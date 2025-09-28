@@ -1,6 +1,5 @@
 package com.universidad.proyecto.gestionhospital.services;
 
-
 import com.universidad.proyecto.gestionhospital.domain.model.Medico;
 import com.universidad.proyecto.gestionhospital.repository.MedicoRepository;
 import org.springframework.stereotype.Service;
@@ -31,5 +30,9 @@ public class MedicoService {
 
     public void delete(Long id) {
         medicoRepository.deleteById(id);
+    }
+
+    public List<Medico> findByEspecialidad(String especialidad) {
+        return medicoRepository.findByEspecialidad(especialidad);
     }
 }

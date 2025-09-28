@@ -1,22 +1,21 @@
+package com.universidad.proyecto.gestionhospital.domain.model;
 
-package com.universidad.proyecto.gestionhospital.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Paciente {
 
+public class Paciente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String nombre;
-    private String documento;
-    private String telefono;
-    private String direccion;
+    private int edad;
 }

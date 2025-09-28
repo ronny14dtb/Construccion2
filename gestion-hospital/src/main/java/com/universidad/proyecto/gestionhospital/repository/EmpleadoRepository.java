@@ -1,4 +1,5 @@
-package com.Universidad.proyecto.GestionHospital.Repository;
+package com.universidad.proyecto.gestionhospital.repository;
+
 
 import com.universidad.proyecto.gestionhospital.domain.model.Empleado;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+
 @RestController
 @RequestMapping("/pacientes")
 public class PacienteController {
@@ -61,4 +63,5 @@ public class PacienteController {
     public Paciente asignarMedico(@PathVariable Long idPaciente, @PathVariable Long idMedico) {
         return asignarMedicoAPaciente.ejecutar(idPaciente, idMedico);
     }
+    
 }

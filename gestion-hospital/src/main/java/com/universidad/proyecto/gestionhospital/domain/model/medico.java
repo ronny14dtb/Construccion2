@@ -1,27 +1,16 @@
 package com.universidad.proyecto.gestionhospital.domain.model;
 
-import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 
-@Entity
-@Table(name = "medicos")
-public class Medico extends Empleado {
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Medico {
+    private String nombre;
     private String especialidad;
-    private String numeroLicencia;
-
-    public Medico() {}
-
-    public Medico(String nombre, String apellido, String cargo, String documentoIdentidad,
-                  String especialidad, String numeroLicencia) {
-        super(nombre, apellido, cargo, documentoIdentidad);
-        this.especialidad = especialidad;
-        this.numeroLicencia = numeroLicencia;
-    }
-
-
-    public String getEspecialidad() { return especialidad; }
-    public void setEspecialidad(String especialidad) { this.especialidad = especialidad; }
-
-    public String getNumeroLicencia() { return numeroLicencia; }
-    public void setNumeroLicencia(String numeroLicencia) { this.numeroLicencia = numeroLicencia; }
+    private int experiencia; // años de experiencia
 }
