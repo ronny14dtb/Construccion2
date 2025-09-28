@@ -1,28 +1,34 @@
 package com.universidad.proyecto.gestionhospital.services;
 
-
-import com.universidad.proyecto.gestionhospital.domain.model.Administracion;
-import com.universidad.proyecto.gestionhospital.repository.AdministrativoRepository;
+import com.universidad.proyecto.gestionhospital.domain.model.Empleado;
+import com.universidad.proyecto.gestionhospital.repository.EmpleadoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AdministracionService {
+public class AdministrativoService {
 
-    private final AdministracionRepository administracionRepository;
+    private final EmpleadoRepository empleadoRepository;
 
-    public AdministracionService(AdministracionRepository administracionRepository) {
-        this.administracionRepository = administracionRepository;
+    public AdministrativoService(EmpleadoRepository empleadoRepository) {
+        this.empleadoRepository = empleadoRepository;
     }
 
-    public List<Administracion> getAll() {
-        return administracionRepository.findAll();
+    public List<Empleado> getAll() {
+        return empleadoRepository.findAll();
     }
 
-    public Optional<Administracion> getById(Long id) {
-        return administracionRepository.findById(id);
+    public Optional<Empleado> getById(Long id) {
+        return empleadoRepository.findById(id);
     }
 
-    public Administracion save(Ad
+    public Empleado save(Empleado empleado) {
+        return empleadoRepository.save(empleado);
+    }
+
+    public void delete(Long id) {
+        empleadoRepository.deleteById(id);
+    }
+}

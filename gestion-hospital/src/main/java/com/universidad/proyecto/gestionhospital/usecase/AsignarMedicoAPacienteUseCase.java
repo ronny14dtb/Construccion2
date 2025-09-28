@@ -25,7 +25,7 @@ public class AsignarMedicoAPacienteUseCase {
 
         if (pacienteOpt.isPresent() && medicoOpt.isPresent()) {
             Paciente paciente = pacienteOpt.get();
-            paciente.setMedico(medicoOpt.get()); // suponiendo que Paciente tiene un campo medico
+            paciente.setMedico(medicoOpt.get());
             return Optional.of(pacienteService.save(paciente));
         }
         return Optional.empty();

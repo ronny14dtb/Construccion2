@@ -17,7 +17,6 @@ public class ActualizarPacienteUseCase {
 
     public Optional<Paciente> ejecutar(Long id, Paciente datosActualizados) {
         return pacienteService.getById(id).map(paciente -> {
-            // Aquí actualizas los campos necesarios
             paciente.setNombre(datosActualizados.getNombre());
             paciente.setEdad(datosActualizados.getEdad());
             paciente.setEnfermedad(datosActualizados.getEnfermedad());

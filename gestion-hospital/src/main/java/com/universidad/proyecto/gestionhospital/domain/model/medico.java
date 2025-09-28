@@ -9,7 +9,6 @@ public class Medico extends Empleado {
     private String especialidad;
     private String numeroLicencia;
 
-    // 🔹 Constructores
     public Medico() {}
 
     public Medico(String nombre, String apellido, String cargo, String documentoIdentidad,
@@ -19,7 +18,7 @@ public class Medico extends Empleado {
         this.numeroLicencia = numeroLicencia;
     }
 
-    // 🔹 Getters y setters
+
     public String getEspecialidad() { return especialidad; }
     public void setEspecialidad(String especialidad) { this.especialidad = especialidad; }
 

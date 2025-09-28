@@ -6,10 +6,10 @@ import jakarta.persistence.*;
 @Table(name = "enfermeras")
 public class Enfermera extends Empleado {
 
-    private String turno; // Ejemplo: "Día", "Noche"
-    private String area;  // Ejemplo: "Urgencias", "Pediatría"
+    private String turno; 
+    private String area;  
 
-    // 🔹 Constructores
+
     public Enfermera() {}
 
     public Enfermera(String nombre, String apellido, String cargo, String documentoIdentidad,
@@ -19,7 +19,6 @@ public class Enfermera extends Empleado {
         this.area = area;
     }
 
-    // 🔹 Getters y Setters
     public String getTurno() { return turno; }
     public void setTurno(String turno) { this.turno = turno; }
 

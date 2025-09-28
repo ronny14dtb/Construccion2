@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "empleados")
-@Inheritance(strategy = InheritanceType.JOINED) // para herencia con Medico, Enfermera, etc.
+@Inheritance(strategy = InheritanceType.JOINED) 
 public class Empleado {
 
     @Id
@@ -16,7 +16,7 @@ public class Empleado {
     private String cargo;
     private String documentoIdentidad;
 
-    // 🔹 Constructores
+
     public Empleado() {}
 
     public Empleado(String nombre, String apellido, String cargo, String documentoIdentidad) {
@@ -26,7 +26,6 @@ public class Empleado {
         this.documentoIdentidad = documentoIdentidad;
     }
 
-    // 🔹 Getters y setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
