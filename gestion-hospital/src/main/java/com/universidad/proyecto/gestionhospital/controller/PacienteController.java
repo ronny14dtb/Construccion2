@@ -2,11 +2,10 @@ package com.universidad.proyecto.gestionhospital.controller;
 
 import com.universidad.proyecto.gestionhospital.domain.model.Paciente;
 import com.universidad.proyecto.gestionhospital.usecase.*;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-
 
 @RestController
 @RequestMapping("/pacientes")
@@ -39,9 +38,10 @@ public class PacienteController {
     }
 
     @PutMapping("/{id}")
-    public Paciente actualizar(@PathVariable Long id, @RequestBody Paciente paciente) {
-        paciente.setId(id);
-        return actualizarPaciente.ejecutar(paciente);
+    public ResponseEntity<Paciente> actualizar(@PathVariable Long id, @RequestBody Paciente datosActualizados) {
+        return actualizarPaciente.ejecutar(id, datosActualizados)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
@@ -55,13 +55,16 @@ public class PacienteController {
     }
 
     @GetMapping("/{id}")
-    public Paciente buscarPorId(@PathVariable Long id) {
-        return buscarPacientePorId.ejecutar(id);
+    public ResponseEntity<Paciente> buscarPorId(@PathVariable Long id) {
+        return buscarPacientePorId.ejecutar(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping("/{idPaciente}/medico/{idMedico}")
-    public Paciente asignarMedico(@PathVariable Long idPaciente, @PathVariable Long idMedico) {
-        return asignarMedicoAPaciente.ejecutar(idPaciente, idMedico);
+    public ResponseEntity<Paciente> asignarMedico(@PathVariable Long idPaciente, @PathVariable Long idMedico) {
+        return asignarMedicoAPaciente.ejecutar(idPaciente, idMedico)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
-    
 }
