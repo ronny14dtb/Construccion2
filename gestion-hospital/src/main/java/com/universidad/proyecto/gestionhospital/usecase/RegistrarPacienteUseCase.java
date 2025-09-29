@@ -1,19 +1,22 @@
 package com.universidad.proyecto.gestionhospital.usecase;
 
+import com.universidad.proyecto.gestionhospital.application.port.in.RegistrarPacienteUseCase;
+import com.universidad.proyecto.gestionhospital.port.out.PacienteRepositoryPort;
 import com.universidad.proyecto.gestionhospital.domain.model.Paciente;
-import com.universidad.proyecto.gestionhospital.services.PacienteService;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
-public class RegistrarPacienteUseCase {
+@Service
+public class RegistrarPacienteService implements RegistrarPacienteUseCase {
 
-    private final PacienteService pacienteService;
+    private final PacienteRepositoryPort pacienteRepositoryPort;
 
-    public RegistrarPacienteUseCase(PacienteService pacienteService) {
-        this.pacienteService = pacienteService;
+    public RegistrarPacienteService(PacienteRepositoryPort pacienteRepositoryPort) {
+        this.pacienteRepositoryPort = pacienteRepositoryPort;
     }
 
-    public Paciente ejecutar(Paciente paciente) {
-        return pacienteService.save(paciente);
+    @Override
+    public Paciente registrar(Paciente paciente) {
+        // Validaciones opcionales antes de guardar
+        return pacienteRepositoryPort.guardar(paciente);
     }
 }

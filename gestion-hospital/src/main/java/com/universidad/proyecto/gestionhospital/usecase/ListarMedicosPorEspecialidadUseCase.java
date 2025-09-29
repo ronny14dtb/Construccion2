@@ -1,21 +1,22 @@
 package com.universidad.proyecto.gestionhospital.usecase;
 
+import com.universidad.proyecto.gestionhospital.application.port.in.ListarMedicosPorEspecialidadUseCase;
+import com.universidad.proyecto.gestionhospital.port.out.MedicoRepositoryPort;
 import com.universidad.proyecto.gestionhospital.domain.model.Medico;
-import com.universidad.proyecto.gestionhospital.services.MedicoService;
-import org.springframework.stereotype.Component;
-
+import org.springframework.stereotype.Service;
 import java.util.List;
 
-@Component
-public class ListarMedicosPorEspecialidadUseCase {
+@Service
+public class ListarMedicosPorEspecialidadService implements ListarMedicosPorEspecialidadUseCase {
 
-    private final MedicoService medicoService;
+    private final MedicoRepositoryPort medicoRepositoryPort;
 
-    public ListarMedicosPorEspecialidadUseCase(MedicoService medicoService) {
-        this.medicoService = medicoService;
+    public ListarMedicosPorEspecialidadService(MedicoRepositoryPort medicoRepositoryPort) {
+        this.medicoRepositoryPort = medicoRepositoryPort;
     }
 
-    public List<Medico> ejecutar(String especialidad) {
-        return medicoService.findByEspecialidad(especialidad);
+    @Override
+    public List<Medico> listarPorEspecialidad(String especialidad) {
+        return medicoRepositoryPort.listarPorEspecialidad(especialidad);
     }
 }

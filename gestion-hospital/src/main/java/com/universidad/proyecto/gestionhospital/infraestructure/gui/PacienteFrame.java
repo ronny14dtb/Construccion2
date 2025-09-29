@@ -1,26 +1,25 @@
-package com.universidad.proyecto.gestionhospital.view;
+package com.universidad.proyecto.gestionhospital.infrastructure.gui;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-import com.universidad.proyecto.gestionhospital.domain.model.Paciente; // <-- IMPORT CORRECTO
-import com.universidad.proyecto.gestionhospital.repository.PacienteRepository;
+import com.universidad.proyecto.gestionhospital.domain.model.Paciente;
+import com.universidad.proyecto.gestionhospital.application.port.in.ListarPacientesUseCase;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.WebApplicationType;
 
-
 @SpringBootApplication
 public class PacienteFrame {
 
     @Autowired
-    private PacienteRepository pacienteRepository;
+    private ListarPacientesUseCase listarPacientesUseCase;
 
     public static void main(String[] args) {
-        // Desactivar web server
+
         var context = new SpringApplication(PacienteFrame.class);
         context.setWebApplicationType(WebApplicationType.NONE);
         var appContext = context.run(args);
@@ -36,7 +35,7 @@ public class PacienteFrame {
 
         JPanel panel = new JPanel(new BorderLayout());
 
-        List<Paciente> pacientes = pacienteRepository.findAll();
+        List<Paciente> pacientes = listarPacientesUseCase.listarPacientes();
 
         StringBuilder sb = new StringBuilder();
         for (Paciente p : pacientes) {

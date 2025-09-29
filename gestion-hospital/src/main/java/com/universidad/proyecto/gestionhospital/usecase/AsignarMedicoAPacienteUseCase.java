@@ -1,33 +1,23 @@
 package com.universidad.proyecto.gestionhospital.usecase;
 
-import com.universidad.proyecto.gestionhospital.domain.model.Medico;
+import com.universidad.proyecto.gestionhospital.application.port.in.ActualizarMedicoPacienteUseCase;
+import com.universidad.proyecto.gestionhospital.port.out.PacienteRepositoryPort;
 import com.universidad.proyecto.gestionhospital.domain.model.Paciente;
-import com.universidad.proyecto.gestionhospital.services.MedicoService;
-import com.universidad.proyecto.gestionhospital.services.PacienteService;
-import org.springframework.stereotype.Component;
+import com.universidad.proyecto.gestionhospital.domain.model.Medico;
+import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+@Service
+public class ActualizarMedicoPacienteService implements ActualizarMedicoPacienteUseCase {
 
-@Component
-public class AsignarMedicoAPacienteUseCase {
+    private final PacienteRepositoryPort pacienteRepositoryPort;
 
-    private final PacienteService pacienteService;
-    private final MedicoService medicoService;
-
-    public AsignarMedicoAPacienteUseCase(PacienteService pacienteService, MedicoService medicoService) {
-        this.pacienteService = pacienteService;
-        this.medicoService = medicoService;
+    public ActualizarMedicoPacienteService(PacienteRepositoryPort pacienteRepositoryPort) {
+        this.pacienteRepositoryPort = pacienteRepositoryPort;
     }
 
-    public Optional<Paciente> ejecutar(Long idPaciente, Long idMedico) {
-        Optional<Paciente> pacienteOpt = pacienteService.getById(idPaciente);
-        Optional<Medico> medicoOpt = medicoService.getById(idMedico);
-
-        if (pacienteOpt.isPresent() && medicoOpt.isPresent()) {
-            Paciente paciente = pacienteOpt.get();
-            paciente.setMedico(medicoOpt.get());
-            return Optional.of(pacienteService.save(paciente));
-        }
-        return Optional.empty();
+    @Override
+    public Paciente actualizarMedico(Paciente paciente, Medico medico) {
+        paciente.setMedico(medico);
+        return pacienteRepositoryPort.guardar(paciente);
     }
 }

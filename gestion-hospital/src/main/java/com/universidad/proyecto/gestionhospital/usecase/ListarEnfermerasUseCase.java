@@ -1,21 +1,22 @@
 package com.universidad.proyecto.gestionhospital.usecase;
 
+import com.universidad.proyecto.gestionhospital.application.port.in.ListarEnfermerasUseCase;
+import com.universidad.proyecto.gestionhospital.port.out.EnfermeraRepositoryPort;
 import com.universidad.proyecto.gestionhospital.domain.model.Enfermera;
-import com.universidad.proyecto.gestionhospital.services.EnfermeraService;
-import org.springframework.stereotype.Component;
-
+import org.springframework.stereotype.Service;
 import java.util.List;
 
-@Component
-public class ListarEnfermerasUseCase {
+@Service
+public class ListarEnfermerasService implements ListarEnfermerasUseCase {
 
-    private final EnfermeraService enfermeraService;
+    private final EnfermeraRepositoryPort enfermeraRepositoryPort;
 
-    public ListarEnfermerasUseCase(EnfermeraService enfermeraService) {
-        this.enfermeraService = enfermeraService;
+    public ListarEnfermerasService(EnfermeraRepositoryPort enfermeraRepositoryPort) {
+        this.enfermeraRepositoryPort = enfermeraRepositoryPort;
     }
 
-    public List<Enfermera> ejecutar() {
-        return enfermeraService.getAll();
+    @Override
+    public List<Enfermera> listar() {
+        return enfermeraRepositoryPort.listarTodas();
     }
 }

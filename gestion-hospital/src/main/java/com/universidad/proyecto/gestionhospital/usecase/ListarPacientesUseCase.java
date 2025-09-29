@@ -1,21 +1,22 @@
 package com.universidad.proyecto.gestionhospital.usecase;
 
+import com.universidad.proyecto.gestionhospital.application.port.in.ListarPacientesUseCase;
+import com.universidad.proyecto.gestionhospital.port.out.PacienteRepositoryPort;
 import com.universidad.proyecto.gestionhospital.domain.model.Paciente;
-import com.universidad.proyecto.gestionhospital.services.PacienteService;
-import org.springframework.stereotype.Component;
-
+import org.springframework.stereotype.Service;
 import java.util.List;
 
-@Component
-public class ListarPacientesUseCase {
+@Service
+public class ListarPacientesService implements ListarPacientesUseCase {
 
-    private final PacienteService pacienteService;
+    private final PacienteRepositoryPort pacienteRepositoryPort;
 
-    public ListarPacientesUseCase(PacienteService pacienteService) {
-        this.pacienteService = pacienteService;
+    public ListarPacientesService(PacienteRepositoryPort pacienteRepositoryPort) {
+        this.pacienteRepositoryPort = pacienteRepositoryPort;
     }
 
-    public List<Paciente> ejecutar() {
-        return pacienteService.getAll();
+    @Override
+    public List<Paciente> listarTodos() {
+        return pacienteRepositoryPort.listarTodos();
     }
 }

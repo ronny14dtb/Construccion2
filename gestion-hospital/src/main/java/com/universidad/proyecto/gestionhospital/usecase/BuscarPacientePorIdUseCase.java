@@ -1,21 +1,23 @@
 package com.universidad.proyecto.gestionhospital.usecase;
 
+import com.universidad.proyecto.gestionhospital.application.port.in.BuscarPacientePorIdUseCase;
+import com.universidad.proyecto.gestionhospital.port.out.PacienteRepositoryPort;
 import com.universidad.proyecto.gestionhospital.domain.model.Paciente;
-import com.universidad.proyecto.gestionhospital.services.PacienteService;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@Component
-public class BuscarPacientePorIdUseCase {
+@Service
+public class BuscarPacientePorIdService implements BuscarPacientePorIdUseCase {
 
-    private final PacienteService pacienteService;
+    private final PacienteRepositoryPort pacienteRepositoryPort;
 
-    public BuscarPacientePorIdUseCase(PacienteService pacienteService) {
-        this.pacienteService = pacienteService;
+    public BuscarPacientePorIdService(PacienteRepositoryPort pacienteRepositoryPort) {
+        this.pacienteRepositoryPort = pacienteRepositoryPort;
     }
 
-    public Optional<Paciente> ejecutar(Long id) {
-        return pacienteService.getById(id);
+    @Override
+    public Optional<Paciente> buscarPorId(Long id) {
+        return pacienteRepositoryPort.buscarPorId(id);
     }
 }

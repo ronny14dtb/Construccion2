@@ -1,19 +1,21 @@
 package com.universidad.proyecto.gestionhospital.usecase;
 
+import com.universidad.proyecto.gestionhospital.application.port.in.RegistrarEnfermeraUseCase;
+import com.universidad.proyecto.gestionhospital.port.out.EnfermeraRepositoryPort;
 import com.universidad.proyecto.gestionhospital.domain.model.Enfermera;
-import com.universidad.proyecto.gestionhospital.services.EnfermeraService;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
-public class RegistrarEnfermeraUseCase {
+@Service
+public class RegistrarEnfermeraService implements RegistrarEnfermeraUseCase {
 
-    private final EnfermeraService enfermeraService;
+    private final EnfermeraRepositoryPort enfermeraRepositoryPort;
 
-    public RegistrarEnfermeraUseCase(EnfermeraService enfermeraService) {
-        this.enfermeraService = enfermeraService;
+    public RegistrarEnfermeraService(EnfermeraRepositoryPort enfermeraRepositoryPort) {
+        this.enfermeraRepositoryPort = enfermeraRepositoryPort;
     }
 
-    public Enfermera ejecutar(Enfermera enfermera) {
-        return enfermeraService.save(enfermera);
+    @Override
+    public Enfermera registrar(Enfermera enfermera) {
+        return enfermeraRepositoryPort.guardar(enfermera);
     }
 }

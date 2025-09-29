@@ -1,19 +1,21 @@
 package com.universidad.proyecto.gestionhospital.usecase;
 
+import com.universidad.proyecto.gestionhospital.application.port.in.RegistrarMedicoUseCase;
+import com.universidad.proyecto.gestionhospital.port.out.MedicoRepositoryPort;
 import com.universidad.proyecto.gestionhospital.domain.model.Medico;
-import com.universidad.proyecto.gestionhospital.services.MedicoService;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
-public class RegistrarMedicoUseCase {
+@Service
+public class RegistrarMedicoService implements RegistrarMedicoUseCase {
 
-    private final MedicoService medicoService;
+    private final MedicoRepositoryPort medicoRepositoryPort;
 
-    public RegistrarMedicoUseCase(MedicoService medicoService) {
-        this.medicoService = medicoService;
+    public RegistrarMedicoService(MedicoRepositoryPort medicoRepositoryPort) {
+        this.medicoRepositoryPort = medicoRepositoryPort;
     }
 
-    public Medico ejecutar(Medico medico) {
-        return medicoService.save(medico);
+    @Override
+    public Medico registrar(Medico medico) {
+        return medicoRepositoryPort.guardar(medico);
     }
 }

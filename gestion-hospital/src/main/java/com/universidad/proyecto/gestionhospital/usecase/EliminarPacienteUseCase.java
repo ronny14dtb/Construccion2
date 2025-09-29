@@ -1,18 +1,20 @@
 package com.universidad.proyecto.gestionhospital.usecase;
 
-import com.universidad.proyecto.gestionhospital.services.PacienteService;
-import org.springframework.stereotype.Component;
+import com.universidad.proyecto.gestionhospital.application.port.in.EliminarPacienteUseCase;
+import com.universidad.proyecto.gestionhospital.port.out.PacienteRepositoryPort;
+import org.springframework.stereotype.Service;
 
-@Component
-public class EliminarPacienteUseCase {
+@Service
+public class EliminarPacienteService implements EliminarPacienteUseCase {
 
-    private final PacienteService pacienteService;
+    private final PacienteRepositoryPort pacienteRepositoryPort;
 
-    public EliminarPacienteUseCase(PacienteService pacienteService) {
-        this.pacienteService = pacienteService;
+    public EliminarPacienteService(PacienteRepositoryPort pacienteRepositoryPort) {
+        this.pacienteRepositoryPort = pacienteRepositoryPort;
     }
 
-    public void ejecutar(Long id) {
-        pacienteService.delete(id);
+    @Override
+    public void eliminar(Long id) {
+        pacienteRepositoryPort.eliminar(id);
     }
 }
