@@ -6,11 +6,11 @@ import com.universidad.proyecto.gestionhospital.domain.model.Medico;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RegistrarMedicoService implements RegistrarMedicoUseCase {
+public class RegistrarMedicoUseCase implements RegistrarMedicoUseCase { 
 
     private final MedicoRepositoryPort medicoRepositoryPort;
 
-    public RegistrarMedicoService(MedicoRepositoryPort medicoRepositoryPort) {
+    public RegistrarMedicoUseCase(MedicoRepositoryPort medicoRepositoryPort) {
         this.medicoRepositoryPort = medicoRepositoryPort;
     }
 

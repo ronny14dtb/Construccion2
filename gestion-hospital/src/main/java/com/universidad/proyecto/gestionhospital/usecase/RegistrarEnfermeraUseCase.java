@@ -6,11 +6,11 @@ import com.universidad.proyecto.gestionhospital.domain.model.Enfermera;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RegistrarEnfermeraService implements RegistrarEnfermeraUseCase {
+public class RegistrarEnfermeraUseCase implements RegistrarEnfermeraUseCase { 
 
     private final EnfermeraRepositoryPort enfermeraRepositoryPort;
 
-    public RegistrarEnfermeraService(EnfermeraRepositoryPort enfermeraRepositoryPort) {
+    public RegistrarEnfermeraUseCase(EnfermeraRepositoryPort enfermeraRepositoryPort) {
         this.enfermeraRepositoryPort = enfermeraRepositoryPort;
     }
 

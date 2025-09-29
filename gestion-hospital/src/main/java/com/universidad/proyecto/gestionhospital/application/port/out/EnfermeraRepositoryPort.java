@@ -1,5 +1,6 @@
 package com.universidad.proyecto.gestionhospital.application.port.out;
 
+
 import com.universidad.proyecto.gestionhospital.domain.model.Enfermera;
 import java.util.List;
 import java.util.Optional;

@@ -1,5 +1,6 @@
 package com.universidad.proyecto.gestionhospital.infrastructure.persistence.mapper;
 
+
 import com.universidad.proyecto.gestionhospital.domain.model.Medico;
 import com.universidad.proyecto.gestionhospital.infrastructure.persistence.entity.MedicoEntity;
 

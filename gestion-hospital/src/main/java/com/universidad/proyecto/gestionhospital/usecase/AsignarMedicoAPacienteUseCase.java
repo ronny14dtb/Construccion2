@@ -1,23 +1,21 @@
 package com.universidad.proyecto.gestionhospital.usecase;
 
-import com.universidad.proyecto.gestionhospital.application.port.in.ActualizarMedicoPacienteUseCase;
-import com.universidad.proyecto.gestionhospital.port.out.PacienteRepositoryPort;
 import com.universidad.proyecto.gestionhospital.domain.model.Paciente;
 import com.universidad.proyecto.gestionhospital.domain.model.Medico;
+import com.universidad.proyecto.gestionhospital.port.out.PacienteRepositoryPort;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ActualizarMedicoPacienteService implements ActualizarMedicoPacienteUseCase {
+public class AsignarMedicoAPacienteUseCase {
 
     private final PacienteRepositoryPort pacienteRepositoryPort;
 
-    public ActualizarMedicoPacienteService(PacienteRepositoryPort pacienteRepositoryPort) {
+    public AsignarMedicoAPacienteUseCase(PacienteRepositoryPort pacienteRepositoryPort) {
         this.pacienteRepositoryPort = pacienteRepositoryPort;
     }
 
-    @Override
-    public Paciente actualizarMedico(Paciente paciente, Medico medico) {
+    public Paciente asignarMedico(Paciente paciente, Medico medico) {
         paciente.setMedico(medico);
-        return pacienteRepositoryPort.guardar(paciente);
+        return pacienteRepositoryPort.actualizar(paciente);
     }
 }

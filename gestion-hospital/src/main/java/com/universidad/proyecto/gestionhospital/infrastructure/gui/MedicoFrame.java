@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-import com.universidad.proyecto.gestionhospital.domain.model.Paciente;
-import com.universidad.proyecto.gestionhospital.application.port.in.ListarPacientesUseCase;
+import com.universidad.proyecto.gestionhospital.domain.model.Medico;
+import com.universidad.proyecto.gestionhospital.application.port.in.ListarMedicosPorEspecialidadUseCase;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -13,35 +13,34 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.WebApplicationType;
 
 @SpringBootApplication
-public class PacienteFrame {
+public class MedicoFrame {
 
     @Autowired
-    private ListarPacientesUseCase listarPacientesUseCase;
+    private ListarMedicosPorEspecialidadUseCase listarMedicosUseCase;
 
     public static void main(String[] args) {
-
-        var context = new SpringApplication(PacienteFrame.class);
+        var context = new SpringApplication(MedicoFrame.class);
         context.setWebApplicationType(WebApplicationType.NONE);
         var appContext = context.run(args);
 
-        PacienteFrame app = appContext.getBean(PacienteFrame.class);
+        MedicoFrame app = appContext.getBean(MedicoFrame.class);
         app.mostrarVentana();
     }
 
     public void mostrarVentana() {
-        JFrame frame = new JFrame("Pacientes del Hospital");
+        JFrame frame = new JFrame("Médicos del Hospital");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 400);
 
         JPanel panel = new JPanel(new BorderLayout());
 
-        List<Paciente> pacientes = listarPacientesUseCase.listarPacientes();
+        List<Medico> medicos = listarMedicosUseCase.listarTodos(); // suponiendo que el usecase tiene listarTodos()
 
         StringBuilder sb = new StringBuilder();
-        for (Paciente p : pacientes) {
-            sb.append("ID: ").append(p.getId())
-              .append(" | Nombre: ").append(p.getNombre())
-              .append(" | Edad: ").append(p.getEdad())
+        for (Medico m : medicos) {
+            sb.append("ID: ").append(m.getId())
+              .append(" | Nombre: ").append(m.getNombre())
+              .append(" | Especialidad: ").append(m.getEspecialidad())
               .append("\n");
         }
 

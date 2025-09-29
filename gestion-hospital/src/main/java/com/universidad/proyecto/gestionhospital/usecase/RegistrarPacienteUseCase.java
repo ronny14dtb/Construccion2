@@ -6,17 +6,16 @@ import com.universidad.proyecto.gestionhospital.domain.model.Paciente;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RegistrarPacienteService implements RegistrarPacienteUseCase {
+public class RegistrarPacienteUseCase implements RegistrarPacienteUseCase { 
 
     private final PacienteRepositoryPort pacienteRepositoryPort;
 
-    public RegistrarPacienteService(PacienteRepositoryPort pacienteRepositoryPort) {
+    public RegistrarPacienteUseCase(PacienteRepositoryPort pacienteRepositoryPort) {
         this.pacienteRepositoryPort = pacienteRepositoryPort;
     }
 
     @Override
     public Paciente registrar(Paciente paciente) {
-        // Validaciones opcionales antes de guardar
         return pacienteRepositoryPort.guardar(paciente);
     }
 }
