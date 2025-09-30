@@ -14,7 +14,6 @@ import java.util.Scanner;
 @RequiredArgsConstructor
 public class VistaConsola implements CommandLineRunner {
 
-    // Inyectamos los CASOS DE USO (puertos de entrada), NUNCA los repositorios.
     private final RegistrarPacienteUseCase registrarPacienteUseCase;
     private final BuscarPacienteUseCase buscarPacienteUseCase;
 
@@ -22,14 +21,13 @@ public class VistaConsola implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("\n--- Menú Principal del Hospital ---");
             System.out.println("1. Registrar Nuevo Paciente");
             System.out.println("2. Buscar Paciente por ID");
             System.out.println("3. Salir");
             System.out.print("Seleccione una opción: ");
             
             int opcion = scanner.nextInt();
-            scanner.nextLine(); // Consumir el salto de línea
+            scanner.nextLine(); 
 
             switch (opcion) {
                 case 1:
@@ -39,7 +37,7 @@ public class VistaConsola implements CommandLineRunner {
                     buscarPacientePorId(scanner);
                     break;
                 case 3:
-                    System.out.println("Saliendo del sistema...");
+                    System.out.println("Saliendo");
                     scanner.close();
                     return;
                 default:
@@ -76,7 +74,7 @@ public class VistaConsola implements CommandLineRunner {
 
             buscarPacienteUseCase.buscarPorId(id)
                     .ifPresentOrElse(
-                        paciente -> System.out.println("\n✅ Paciente encontrado: " + paciente),
+                        paciente -> System.out.println("\n Paciente encontrado: " + paciente),
                         () -> System.out.println("\n❌ No se encontró ningún paciente con el ID " + id)
                     );
         } catch (Exception e) {
