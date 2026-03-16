@@ -8,8 +8,6 @@ public class Loans {
     private String idClienteSolicitante;
     private BigDecimal montoSolicitado;
     private BigDecimal montoAprobado;
-    private String estadoPrestamo; // En estudio, Aprobado, Rechazado, Desembolsado
+    private String estadoPrestamo; 
     private String cuentaDestinoDesembolso;
-
-    // Getters y Setters
 }
