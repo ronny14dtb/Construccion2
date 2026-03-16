@@ -5,5 +5,4 @@ public class ClientCompany extends User {
     private String nit;
     private ClientPerson representanteLegal; 
     
-    // Getters y Setters
 }
