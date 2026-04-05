@@ -1,15 +1,22 @@
 package com.Bank.app.domain.model;
 
-
 import com.Bank.app.domain.constant.RolSistem;
+import com.Bank.app.domain.constant.UserStatus;
+import com.Bank.app.domain.model.vo.Email;
 
 public abstract class User {
     private Long idUsuario;
-    private String nombreCompleto;
-    private String identificacion;
-    private String correoElectronico;
-    private String telefono;
-    private String direccion;
+    private String username;
+    private String password;
+    private Email correo;
     private RolSistem rol;
-    private String estadoUsuario;
+    private UserStatus estado;
+
+ public RolSistem getRol() {
+    return this.rol;
+}
+
+    public void setRol(RolSistem rol) {
+        this.rol = rol;
+    }
 }
