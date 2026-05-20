@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "BankApplication",
+            "request": "launch",
+            "mainClass": "com.Bank.app.application.BankApplication",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-GestionHospitalApplication<gestion-estudiantes>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.hospital.app.GestionHospitalApplication",
+            "projectName": "gestion-estudiantes",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
