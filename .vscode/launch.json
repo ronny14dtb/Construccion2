@@ -2,6 +2,12 @@
     "configurations": [
         {
             "type": "java",
+            "name": "BankApplication",
+            "request": "launch",
+            "mainClass": "com.Bank.app.BankApplication"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-GestionHospitalApplication<gestion-estudiantes>",
             "request": "launch",
             "cwd": "${workspaceFolder}",

@@ -1,7 +1,12 @@
-package com.Bank.app.domain.infrastructure.adapter.sql.repository;
-import com.Bank.app.domain.model.Bankaccount;
+package main.java.com.Bank.app.infrastructure.adapter.sql.repository;
 
-public interface BankAccountJpaRepository {
-    Bankaccount findByNumber(String number);
-    void save(Bankaccount account);
+import main.java.com.Bank.app.infrastructure.adapter.sql.entity.BankAccountEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import java.util.List;
+
+@Repository
+public interface BankAccountJpaRepository extends JpaRepository<BankAccountEntity, String> {
+    
+    List<BankAccountEntity> findByIdTitular(String idTitular);
 }

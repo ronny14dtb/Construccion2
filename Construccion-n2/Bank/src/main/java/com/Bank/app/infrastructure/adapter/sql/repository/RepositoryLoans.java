@@ -1,7 +1,12 @@
-package com.Bank.app.domain.infrastructure.adapter.sql.repository;
-import com.Bank.app.domain.model.Loans;
+package main.java.com.Bank.app.infrastructure.adapter.sql.repository;
 
-public interface RepositoryLoans {
-    void save(Loans loan);
-    Loans findById(Long id);
+import main.java.com.Bank.app.infrastructure.adapter.sql.entity.LoanEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import java.util.List;
+
+@Repository
+public interface RepositoryLoans extends JpaRepository<LoanEntity, Integer> {
+    
+    List<LoanEntity> findByIdClienteSolicitante(String idClienteSolicitante);
 }
