@@ -1,4 +1,4 @@
-package com.Bank.app.domain.repository;
+package com.Bank.app.domain.infrastructure.adapter.sql.repository;
 
 import com.Bank.app.domain.model.Transfer;
 import java.util.List;
