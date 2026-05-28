@@ -4,9 +4,9 @@ import com.Bank.app.application.ports.out.AuditLogPort;
 import com.Bank.app.domain.model.OperationLog;
 import com.Bank.app.infrastructure.adapter.sql.entity.LogEntity;
 import com.Bank.app.infrastructure.adapter.sql.repository.RepositoryLog;
-import org.springframework.stereotype.Repository;
 
-@Repository
+
+
 public class DatabaseAuditLogAdapter implements AuditLogPort {
 
     private final RepositoryLog logRepository;

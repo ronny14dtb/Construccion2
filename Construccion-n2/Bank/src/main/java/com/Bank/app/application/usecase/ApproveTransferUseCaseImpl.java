@@ -80,6 +80,18 @@ public class ApproveTransferUseCaseImpl implements ApproveTransferUseCase {
         log.setIdUsuario(supervisorId);
         log.setRolUsuario(user.getRolSistema());
         log.setIdProductoAfectado(transferId.toString());
+
+        System.out.println("DEBUG: Preparando para guardar en MongoDB el log: " + log);
+        
+        try {
+            auditLogPort.save(log);
+            System.out.println("DEBUG: Guardado en MongoDB realizado con éxito.");
+        } catch (Exception e) {
+            System.out.println("DEBUG: ERROR al guardar en MongoDB: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        System.out.println(">>> ¡A punto de guardar en MongoDB! ID de usuario: " + supervisorId);
         auditLogPort.save(log);
 
         return savedTransfer;
