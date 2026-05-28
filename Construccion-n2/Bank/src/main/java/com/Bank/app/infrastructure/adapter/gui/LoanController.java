@@ -1,10 +1,10 @@
-package main.java.com.Bank.app.infrastructure.adapter.gui;
+package com.Bank.app.infrastructure.adapter.gui;
 
-import main.java.com.Bank.app.application.dto.LoanRequest;
-import main.java.com.Bank.app.application.ports.in.RequestLoanUseCase;
-import main.java.com.Bank.app.application.ports.in.ApproveLoanUseCase;
-import main.java.com.Bank.app.application.ports.in.RejectLoanUseCase;
-import main.java.com.Bank.app.application.ports.in.DisburseLoanUseCase;
+import com.Bank.app.application.dto.LoanRequest;
+import com.Bank.app.application.ports.in.RequestLoanUseCase;
+import com.Bank.app.application.ports.in.ApproveLoanUseCase;
+import com.Bank.app.application.ports.in.RejectLoanUseCase;
+import com.Bank.app.application.ports.in.DisburseLoanUseCase;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +39,7 @@ public class LoanController {
     }
 
     @PostMapping("/{id}/approve")
-    public ResponseEntity<?> approveLoan(@PathVariable Integer id, @RequestParam String analystId) {
+    public ResponseEntity<?> approveLoan(@PathVariable Long id, @RequestParam Integer analystId) {
         try {
             approveLoanUseCase.execute(id, analystId);
             return ResponseEntity.ok("Préstamo aprobado de forma exitosa.");
@@ -49,7 +49,7 @@ public class LoanController {
     }
 
     @PostMapping("/{id}/reject")
-    public ResponseEntity<?> rejectLoan(@PathVariable Integer id, @RequestParam String analystId) {
+    public ResponseEntity<?> rejectLoan(@PathVariable Long id, @RequestParam Integer analystId) {
         try {
             rejectLoanUseCase.execute(id, analystId);
             return ResponseEntity.ok("Préstamo rechazado correctamente.");
@@ -59,9 +59,9 @@ public class LoanController {
     }
 
     @PostMapping("/{id}/disburse")
-    public ResponseEntity<?> disburseLoan(@PathVariable Integer id) {
+    public ResponseEntity<?> disburseLoan(@PathVariable Long id, @RequestParam Integer analystId) {
         try {
-            disburseLoanUseCase.execute(id);
+            disburseLoanUseCase.execute(id, analystId);
             return ResponseEntity.ok("Monto del préstamo desembolsado en la cuenta destino.");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

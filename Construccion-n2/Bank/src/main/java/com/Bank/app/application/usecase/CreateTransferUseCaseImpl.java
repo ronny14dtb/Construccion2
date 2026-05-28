@@ -1,19 +1,19 @@
-package main.java.com.Bank.app.application.usecase;
+package com.Bank.app.application.usecase;
 
 import com.Bank.app.application.dto.TransferRequest;
 import com.Bank.app.application.ports.in.CreateTransferUseCase;
-import com.Bank.app.application.ports.out.AuditLogPort;
-import com.Bank.app.application.ports.out.BankAccountRepositoryPort;
-import com.Bank.app.application.ports.out.TransferRepositoryPort;
-import com.Bank.app.application.ports.out.UserRepositoryPort;
+import com.Bank.app.application.ports.out.*;
 import com.Bank.app.domain.exceptions.DomainException;
-import com.Bank.app.domain.model.Bankaccount;
-import com.Bank.app.domain.model.OperationLog;
-import com.Bank.app.domain.model.Transfer;
-import com.Bank.app.domain.model.User;
-
+import com.Bank.app.domain.model.*;
+import com.Bank.app.domain.model.vo.Money;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
+@Service
+@Component
 public class CreateTransferUseCaseImpl implements CreateTransferUseCase {
 
     private final TransferRepositoryPort transferRepositoryPort;
@@ -21,10 +21,12 @@ public class CreateTransferUseCaseImpl implements CreateTransferUseCase {
     private final UserRepositoryPort userRepositoryPort;
     private final AuditLogPort auditLogPort;
 
-    private static final Double UMBRAL_EMPRESA = 5000000.0;
+    private static final BigDecimal UMBRAL_EMPRESA = new BigDecimal("5000000.0");
 
-    public CreateTransferUseCaseImpl(TransferRepositoryPort transferRepositoryPort, BankAccountRepositoryPort accountRepositoryPort, 
-                                     UserRepositoryPort userRepositoryPort, AuditLogPort auditLogPort) {
+    public CreateTransferUseCaseImpl(TransferRepositoryPort transferRepositoryPort, 
+                                     BankAccountRepositoryPort accountRepositoryPort, 
+                                     UserRepositoryPort userRepositoryPort, 
+                                     AuditLogPort auditLogPort) {
         this.transferRepositoryPort = transferRepositoryPort;
         this.accountRepositoryPort = accountRepositoryPort;
         this.userRepositoryPort = userRepositoryPort;
@@ -33,7 +35,11 @@ public class CreateTransferUseCaseImpl implements CreateTransferUseCase {
 
     @Override
     public Transfer execute(TransferRequest request) {
-        User user = userRepositoryPort.findById(request.getIdUsuarioCreador())
+
+
+        Integer userId = Integer.valueOf(request.getIdUsuarioCreador());
+
+        User user = userRepositoryPort.findById(userId)
                 .orElseThrow(() -> new DomainException("Usuario creador no encontrado."));
 
         Bankaccount source = accountRepositoryPort.findByNumber(request.getCuentaOrigen())
@@ -42,26 +48,24 @@ public class CreateTransferUseCaseImpl implements CreateTransferUseCase {
         Bankaccount destination = accountRepositoryPort.findByNumber(request.getCuentaDestino())
                 .orElseThrow(() -> new DomainException("La cuenta de destino no existe."));
 
+        Money montoTransferir = new Money(request.getMonto());
+
         Transfer transfer = new Transfer();
         transfer.setCuentaOrigen(request.getCuentaOrigen());
         transfer.setCuentaDestino(request.getCuentaDestino());
-        transfer.setMonto(request.getMonto());
+        transfer.setMonto(montoTransferir);
         transfer.setFechaCreacion(LocalDateTime.now());
-        transfer.setIdUsuarioCreador(request.getIdUsuarioCreador());
+        transfer.setIdUsuarioCreador(userId);
 
-
-        if ("Empleado de Empresa".equals(user.getRolSistema()) && request.getMonto() > UMBRAL_EMPRESA) {
+  
+        if ("Empleado de Empresa".equals(user.getRolSistema()) && request.getMonto().compareTo(UMBRAL_EMPRESA) > 0) {
             transfer.setEstadoTransferencia("En espera de aprobación");
             return transferRepositoryPort.save(transfer);
         }
 
-
-        if (source.getSaldoActual() < request.getMonto()) {
-            throw new DomainException("Saldo insuficiente para realizar la transferencia.");
-        }
-
-        source.setSaldoActual(source.getSaldoActual() - request.getMonto());
-        destination.setSaldoActual(destination.getSaldoActual() + request.getMonto());
+        source.validarSaldo(montoTransferir);
+        source.withdraw(montoTransferir);
+        destination.deposit(montoTransferir);
 
         accountRepositoryPort.save(source);
         accountRepositoryPort.save(destination);
@@ -69,12 +73,13 @@ public class CreateTransferUseCaseImpl implements CreateTransferUseCase {
         transfer.setEstadoTransferencia("Ejecutada");
         Transfer savedTransfer = transferRepositoryPort.save(transfer);
 
+ 
         OperationLog log = new OperationLog();
         log.setTipoOperacion("TRANSFERENCIA_EJECUTADA");
         log.setFechaHoraOperacion(LocalDateTime.now());
-        log.setIdUsuario(request.getIdUsuarioCreador());
+        log.setIdUsuario(userId);
         log.setRolUsuario(user.getRolSistema());
-        log.setIdProductoAfectado(savedTransfer.getIdTransferencia().toString());
+        log.setIdProductoAfectado(String.valueOf(savedTransfer.getIdTransferencia()));
         auditLogPort.save(log);
 
         return savedTransfer;

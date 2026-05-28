@@ -1,8 +1,8 @@
-package main.java.com.Bank.app.infrastructure.adapter.gui;
+package com.Bank.app.infrastructure.adapter.gui;
 
-import main.java.com.Bank.app.application.dto.BankAccountRequest;
-import main.java.com.Bank.app.application.ports.in.OpenBankAccountUseCase;
-import main.java.com.Bank.app.domain.model.Bankaccount;
+import com.Bank.app.application.dto.BankAccountRequest;
+import com.Bank.app.application.ports.in.OpenBankAccountUseCase;
+import com.Bank.app.domain.model.Bankaccount;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

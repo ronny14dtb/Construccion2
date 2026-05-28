@@ -1,6 +1,6 @@
-package main.java.com.Bank.app.infrastructure.adapter.sql.repository;
+package com.Bank.app.infrastructure.adapter.sql.repository;
 
-import main.java.com.Bank.app.infrastructure.adapter.sql.entity.LoanEntity;
+import com.Bank.app.infrastructure.adapter.sql.entity.LoanEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;

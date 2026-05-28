@@ -1,4 +1,4 @@
-package main.java.com.Bank.app.application.usecase;
+package com.Bank.app.application.usecase;
 
 import com.Bank.app.application.ports.in.ApproveTransferUseCase;
 import com.Bank.app.application.ports.out.AuditLogPort;
@@ -12,6 +12,9 @@ import com.Bank.app.domain.model.Transfer;
 import com.Bank.app.domain.model.User;
 
 import java.time.LocalDateTime;
+import org.springframework.stereotype.Service;
+
+@Service
 
 public class ApproveTransferUseCaseImpl implements ApproveTransferUseCase {
 
@@ -55,12 +58,12 @@ public class ApproveTransferUseCaseImpl implements ApproveTransferUseCase {
         Bankaccount destination = accountRepositoryPort.findByNumber(transfer.getCuentaDestino())
                 .orElseThrow(() -> new DomainException("Cuenta de destino inválida."));
 
-        if (source.getSaldoActual() < transfer.getMonto()) {
+        if (source.getSaldoActual().compareTo(transfer.getMonto()) < 0) {
             throw new DomainException("La cuenta origen ya no posee fondos suficientes.");
         }
 
-        source.setSaldoActual(source.getSaldoActual() - transfer.getMonto());
-        destination.setSaldoActual(destination.getSaldoActual() + transfer.getMonto());
+        source.setSaldoActual(source.getSaldoActual().subtract(transfer.getMonto()));
+        destination.setSaldoActual(destination.getSaldoActual().add(transfer.getMonto()));
 
         accountRepositoryPort.save(source);
         accountRepositoryPort.save(destination);

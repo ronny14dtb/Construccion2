@@ -1,36 +1,36 @@
 package com.Bank.app.domain.model;
 
-import com.Bank.app.domain.model.vo.Money; 
-import com.Bank.app.domain.constant.RolSistem;
-import java.time.LocalDate;
-import com.Bank.app.domain.exceptions.DomainException;
+import com.Bank.app.domain.model.vo.Money;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import java.time.LocalDateTime;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Loans {
-    private Long idPrestamo;
-    private String idClienteSolicitante;
-    private Money montoSolicitado;
-    private Money montoAprobado; 
+    private Long id;
     private String estadoPrestamo;
+    
+
+    private Money montoSolicitado;
+    private Money montoAprobado;
+    
+
+    private String tipoPrestamo; 
+    private String idClienteSolicitante;
+    private Double tasaInteres;
+    private int plazoMeses;
+    
+    private LocalDateTime fechaAprobacion;
+    private LocalDateTime fechaDesembolso;
     private String cuentaDestinoDesembolso;
 
 
+    public void approve(String rol) {
 
-
-    public String getEstadoPrestamo() {
-        return this.estadoPrestamo;
-    }
-
-    public void setEstadoPrestamo(String estado) {
-        this.estadoPrestamo = estado;
-    }
-
-    public Money getMontoAprobado() {
-        return this.montoAprobado;
-    }
-
-    public void approve(RolSistem rol) {
-        if (rol == RolSistem.ANALISTA_INTERNO) {
-            this.estadoPrestamo = "APROBADO";
-        }
+        this.estadoPrestamo = "APROBADO";
+        this.fechaAprobacion = LocalDateTime.now();
     }
 }

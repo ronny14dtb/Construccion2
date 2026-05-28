@@ -1,4 +1,4 @@
-package main.java.com.Bank.app.application.ports.out;
+package com.Bank.app.application.ports.out;
 
 import com.Bank.app.domain.model.Loans;
 import java.util.Optional;

@@ -1,8 +1,11 @@
-package main.java.com.Bank.app.infrastructure.persistence;
+package com.Bank.app.infrastructure.persistence;
 
-import main.java.com.Bank.app.application.ports.out.ClientRepositoryPort;
-import main.java.com.Bank.app.infrastructure.adapter.sql.repository.RepositoryUser;
+import com.Bank.app.application.ports.out.ClientRepositoryPort;
+import com.Bank.app.infrastructure.adapter.sql.repository.RepositoryUser;
+import com.Bank.app.domain.model.ClientPerson;
+import com.Bank.app.domain.model.ClientCompany;
 import org.springframework.stereotype.Component;
+import java.util.Optional;
 
 @Component
 public class MySQLClientRepository implements ClientRepositoryPort {
@@ -14,7 +17,18 @@ public class MySQLClientRepository implements ClientRepositoryPort {
     }
 
     @Override
-    public boolean existsByIdIdentificacion(String idIdentificacion) {
-        return repositoryUser.existsByIdIdentificacion(idIdentificacion);
+    public boolean existsByIdentification(String id) {
+        return repositoryUser.existsById(Integer.valueOf(id)); 
+    }
+
+    @Override
+    public Optional<ClientPerson> findPersonById(String id) {
+
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<ClientCompany> findCompanyById(String id) {
+        return Optional.empty();
     }
 }

@@ -2,10 +2,10 @@ package com.Bank.app.infrastructure.persistence;
 
 import com.Bank.app.application.ports.out.BankAccountRepositoryPort;
 import com.Bank.app.domain.model.Bankaccount;
+import com.Bank.app.domain.model.vo.Money;
 import com.Bank.app.infrastructure.adapter.sql.entity.BankAccountEntity;
 import com.Bank.app.infrastructure.adapter.sql.repository.BankAccountJpaRepository;
 import org.springframework.stereotype.Repository;
-
 import java.util.Optional;
 
 @Repository
@@ -20,16 +20,17 @@ public class MySQLAccountRepository implements BankAccountRepositoryPort {
     @Override
     public Bankaccount save(Bankaccount account) {
         BankAccountEntity entity = new BankAccountEntity();
-        entity.setNumeroCuenta(account.getNumeroCuenta());
+        
         entity.setTipoCuenta(account.getTipoCuenta());
         entity.setIdTitular(account.getIdTitular());
-        entity.setSaldoActual(account.getSaldoActual());
+        
+
+        entity.setSaldoActual(account.getSaldoActual().getAmount()); 
+        
         entity.setMoneda(account.getMoneda());
         entity.setEstadoCuenta(account.getEstadoCuenta());
 
-
         BankAccountEntity savedEntity = jpaRepository.save(entity);
-
 
         account.setNumeroCuenta(savedEntity.getNumeroCuenta());
         return account;
@@ -43,7 +44,10 @@ public class MySQLAccountRepository implements BankAccountRepositoryPort {
                     domainAccount.setNumeroCuenta(entity.getNumeroCuenta());
                     domainAccount.setTipoCuenta(entity.getTipoCuenta());
                     domainAccount.setIdTitular(entity.getIdTitular());
-                    domainAccount.setSaldoActual(entity.getSaldoActual());
+                    
+     
+                    domainAccount.setSaldoActual(new Money(entity.getSaldoActual()));
+                    
                     domainAccount.setMoneda(entity.getMoneda());
                     domainAccount.setEstadoCuenta(entity.getEstadoCuenta());
                     return domainAccount;

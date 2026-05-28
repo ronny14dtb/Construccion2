@@ -1,4 +1,4 @@
-package main.java.com.Bank.app.infrastructure.adapter.sql.entity;
+package com.Bank.app.infrastructure.adapter.sql.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

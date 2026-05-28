@@ -1,14 +1,18 @@
-package main.java.com.Bank.app.infrastructure.adapter.sql.entity;
+package com.Bank.app.infrastructure.adapter.sql.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "usuarios")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor 
 public class UserEntity {
 
     @Id
@@ -42,7 +46,6 @@ public class UserEntity {
 
     @Column(name = "estado_usuario", nullable = false)
     private String estadoUsuario; 
-
 
     @Column(name = "username", unique = true, nullable = false)
     private String username;

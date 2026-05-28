@@ -1,4 +1,4 @@
-package main.java.com.Bank.app.infrastructure.adapter.gui;
+package com.Bank.app.infrastructure.adapter.gui;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,4 +1,4 @@
-package main.java.com.Bank.app.application.usecase;
+package com.Bank.app.application.usecase;
 
 import com.Bank.app.application.ports.in.RejectLoanUseCase;
 import com.Bank.app.application.ports.out.AuditLogPort;
@@ -8,8 +8,10 @@ import com.Bank.app.domain.exceptions.DomainException;
 import com.Bank.app.domain.model.Loans;
 import com.Bank.app.domain.model.OperationLog;
 import com.Bank.app.domain.model.User;
-
+import org.springframework.stereotype.Service; 
 import java.time.LocalDateTime;
+
+@Service
 
 public class RejectLoanUseCaseImpl implements RejectLoanUseCase {
 

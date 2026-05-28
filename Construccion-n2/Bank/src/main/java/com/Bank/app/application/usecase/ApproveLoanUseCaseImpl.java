@@ -1,4 +1,4 @@
-package main.java.com.Bank.app.application.usecase;
+package com.Bank.app.application.usecase;
 
 import com.Bank.app.application.ports.in.ApproveLoanUseCase;
 import com.Bank.app.application.ports.out.AuditLogPort;
@@ -8,18 +8,22 @@ import com.Bank.app.domain.exceptions.DomainException;
 import com.Bank.app.domain.model.Loans;
 import com.Bank.app.domain.model.OperationLog;
 import com.Bank.app.domain.model.User;
+import org.springframework.stereotype.Service; 
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+@Service 
 public class ApproveLoanUseCaseImpl implements ApproveLoanUseCase {
 
     private final LoanRepositoryPort loanRepositoryPort;
     private final UserRepositoryPort userRepositoryPort;
     private final AuditLogPort auditLogPort;
 
-    public ApproveLoanUseCaseImpl(LoanRepositoryPort loanRepositoryPort, UserRepositoryPort userRepositoryPort, AuditLogPort auditLogPort) {
+    public ApproveLoanUseCaseImpl(LoanRepositoryPort loanRepositoryPort, 
+                                  UserRepositoryPort userRepositoryPort, 
+                                  AuditLogPort auditLogPort) {
         this.loanRepositoryPort = loanRepositoryPort;
         this.userRepositoryPort = userRepositoryPort;
         this.auditLogPort = auditLogPort;
@@ -46,7 +50,6 @@ public class ApproveLoanUseCaseImpl implements ApproveLoanUseCase {
         loan.setFechaAprobacion(LocalDateTime.now());
 
         Loans savedLoan = loanRepositoryPort.save(loan);
-
 
         OperationLog log = new OperationLog();
         log.setTipoOperacion("APROBACION_PRESTAMO");

@@ -1,4 +1,4 @@
-package main.java.com.Bank.app.application.ports.in;
+package com.Bank.app.application.ports.in;
 
 
 import com.Bank.app.application.dto.TransferRequest;
